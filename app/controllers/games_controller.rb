@@ -14,15 +14,15 @@ class GamesController < ApplicationController
   end
 
   def score
-      @letters = params[:letters]
-      @word = params[:word]
-      url = "https://wagon-dictionary.herokuapp.com/#{@word}"
-      word_dictionary = URI.open(url).read
-      worded = JSON.parse(word_dictionary)
-      if worded['found'] && letter_in_grid(@word, @letters)
-        @score = "winner, your word is valid"
-      else
-        @score = "Sorry, but #{@word}, can't be built out of #{@letters}"
-      end
+    @letters = params[:letters]
+    @word = params[:word]
+    url = "https://wagon-dictionary.herokuapp.com/#{@word}"
+    word_dictionary = URI.open(url).read
+    worded = JSON.parse(word_dictionary)
+    if worded['found'] && letter_in_grid(@word, @letters)
+      @score = "Congratulations! #{@word} is a valid English word"
+    else
+      @score = "Sorry, but #{@word}, can't be built out of #{@letters}"
+    end
   end
 end
